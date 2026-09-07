@@ -27,6 +27,38 @@ Vercel usa `npm run build` y el directorio `dist`.
 
 La sesion y los proyectos funcionan localmente con `localStorage` para que el producto sea usable sin credenciales externas. La frontera de persistencia esta aislada en `src/dashboard/auth.tsx`, `src/dashboard/store.ts` y `src/dashboard/context.ts`; en produccion se pueden sustituir por Supabase Auth, Postgres y Storage sin cambiar la interfaz del editor.
 
+## Configurar Supabase
+
+1. Crea un proyecto en [supabase.com](https://supabase.com).
+2. Abre `SQL Editor`, pega y ejecuta `supabase/schema.sql`.
+3. En `Project Settings > API`, copia `Project URL` y `anon public key`.
+4. Duplica `.env.example` como `.env.local` y completa:
+
+```env
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+VITE_SUPABASE_ANON_KEY=tu-clave-anon-publica
+```
+
+5. Reinicia `npm run dev`.
+6. En `/login`, introduce tu email. Supabase enviara un magic link; al abrirlo volveras a `/dashboard`.
+
+Nunca uses la `service_role key` en este frontend. Solo la clave `anon public` debe llegar al navegador, y el aislamiento real lo hacen las policies RLS del SQL.
+
+## Despliegue en Vercel
+
+1. Sube el repositorio a GitHub.
+2. Importa el repositorio en Vercel.
+3. Usa `npm run build` como Build Command y `dist` como Output Directory.
+4. En Vercel, abre `Settings > Environment Variables` y añade `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` para Production, Preview y Development según corresponda.
+5. En Supabase, abre `Authentication > URL Configuration` y añade:
+	- `http://localhost:5173/**`
+	- `https://tu-dominio.vercel.app/**`
+	- Tu dominio personalizado cuando lo conectes.
+6. En `Site URL`, usa la URL pública principal de Vercel o tu dominio final.
+7. Haz un redeploy después de guardar las variables.
+
+`vercel.json` mantiene funcionando las rutas SPA `/login` y `/dashboard` cuando el usuario entra directamente o refresca una página.
+
 ## Crear un cliente
 
 1. Edita `src/data/business.ts` con identidad, contacto, imagenes, servicios, equipo, testimonios, precios y FAQ.
