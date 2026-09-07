@@ -15,7 +15,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     return () => listener.subscription.unsubscribe()
   }, [])
   const signIn = async (email: string): Promise<'local' | 'magic-link'> => {
-    if (isSupabaseConfigured && supabase) { const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/dashboard` } }); if (error) throw error; return 'magic-link' }
+    if (isSupabaseConfigured && supabase) { const { error } = await supabase.auth.signInWithOtp({ email, options: { emailRedirectTo: `${window.location.origin}/dashboard` } }); if (error) throw new Error(error.message); return 'magic-link' }
     const next = { name: email.split('@')[0] || 'Owner', email, role: 'owner' as const }; sessionStore.save(next); setSession(next); return 'local'
   }
   const signOut = async () => { if (isSupabaseConfigured && supabase) await supabase.auth.signOut(); sessionStore.clear(); setSession(null) }
