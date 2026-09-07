@@ -1,0 +1,9 @@
+import { CalendarDays, MapPin, ShoppingBag } from 'lucide-react'
+import type { MenuCategory, Membership, Product, Property, Room } from '../../types/domains'
+import { Card } from '../ui/primitives'
+
+export function MenuCategoryCard({ category }: { category: MenuCategory }) { return <Card className="domain-card menu-category"><h3>{category.name}</h3><div>{category.items.map((item) => <article key={item.id}><div><strong>{item.name}</strong>{item.description && <p>{item.description}</p>}</div><span>{item.price}</span></article>)}</div></Card> }
+export function ProductCard({ product }: { product: Product }) { return <Card className="domain-card"><img src={product.image.src} alt={product.image.alt} loading="lazy" /><span className="card-meta">{product.badge ?? product.category}</span><h3>{product.name}</h3><strong>{product.price}</strong><ShoppingBag size={16} /></Card> }
+export function PropertyCard({ property }: { property: Property }) { return <Card className="domain-card"><img src={property.image.src} alt={property.image.alt} loading="lazy" /><span className="card-meta"><MapPin size={13} /> {property.location}</span><h3>{property.title}</h3><strong>{property.price}</strong></Card> }
+export function RoomCard({ room }: { room: Room }) { return <Card className="domain-card"><img src={room.image.src} alt={room.image.alt} loading="lazy" /><span className="card-meta">{room.capacity}</span><h3>{room.name}</h3><p>{room.description}</p><strong>{room.price}</strong></Card> }
+export function MembershipCard({ membership }: { membership: Membership }) { return <Card className={`domain-card${membership.featured ? ' featured' : ''}`}><span className="card-meta"><CalendarDays size={13} /> {membership.period}</span><h3>{membership.name}</h3><strong>{membership.price}</strong><ul>{membership.benefits.map((benefit) => <li key={benefit}>{benefit}</li>)}</ul></Card> }
