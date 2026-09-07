@@ -48,14 +48,15 @@ Nunca uses la `service_role key` en este frontend. Solo la clave `anon public` d
 
 1. Sube el repositorio a GitHub.
 2. Importa el repositorio en Vercel.
-3. Usa `npm run build` como Build Command y `dist` como Output Directory.
-4. En Vercel, abre `Settings > Environment Variables` y añade `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` para Production, Preview y Development según corresponda.
-5. En Supabase, abre `Authentication > URL Configuration` y añade:
+3. En `Project Settings > General`, deja `Root Directory` vacío (`/`). No uses `dx-plantilla`: esa carpeta ya no existe.
+4. Usa `npm run build` como Build Command y `dist` como Output Directory.
+5. En Vercel, abre `Settings > Environment Variables` y añade `VITE_SUPABASE_URL` y `VITE_SUPABASE_ANON_KEY` para Production, Preview y Development según corresponda.
+6. En Supabase, abre `Authentication > URL Configuration` y añade:
 	- `http://localhost:5173/**`
 	- `https://tu-dominio.vercel.app/**`
 	- Tu dominio personalizado cuando lo conectes.
-6. En `Site URL`, usa la URL pública principal de Vercel o tu dominio final.
-7. Haz un redeploy después de guardar las variables.
+7. En `Site URL`, usa la URL pública principal de Vercel o tu dominio final.
+8. Haz un redeploy después de guardar las variables.
 
 `vercel.json` mantiene funcionando las rutas SPA `/login` y `/dashboard` cuando el usuario entra directamente o refresca una página.
 
