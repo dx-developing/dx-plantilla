@@ -28,3 +28,10 @@ export async function upsertRemoteProject(project: Project): Promise<void> {
   const { error } = await supabase.from('projects').upsert({ id: project.id, organization_id: organizationId, name: project.name, client: project.client, category: project.category, status: project.status, updated_at: project.updatedAt, theme: project.theme, sections: project.sections })
   if (error) throw error
 }
+
+export async function getPublishedProject(id: string): Promise<Project | null> {
+  if (!isSupabaseConfigured || !supabase) return null
+  const { data, error } = await supabase.from('projects').select('id,name,client,category,status,updated_at,theme,sections').eq('id', id).eq('status', 'published').maybeSingle()
+  if (error) throw error
+  return data ? fromRow(data as ProjectRow) : null
+}

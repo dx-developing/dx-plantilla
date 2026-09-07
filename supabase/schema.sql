@@ -62,6 +62,10 @@ create policy "Members can view projects"
   on public.projects for select
   using (public.is_org_member(organization_id));
 
+create policy "Anyone can view published projects"
+  on public.projects for select
+  using (status = 'published');
+
 create policy "Editors can create projects"
   on public.projects for insert
   with check (public.is_org_member(organization_id));

@@ -6,6 +6,7 @@ export type BuilderSection = {
   label: string
   enabled: boolean
   variant: string
+  variants?: string[]
 }
 
 export type Project = {

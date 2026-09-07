@@ -4,14 +4,14 @@ const projectKey = 'dexyn-projects'
 const sessionKey = 'dexyn-session'
 
 export const defaultSections = (): Project['sections'] => [
-  { id: 'hero', type: 'hero', label: 'Hero principal', enabled: true, variant: 'split' },
-  { id: 'services', type: 'services', label: 'Servicios', enabled: true, variant: 'cards' },
-  { id: 'about', type: 'about', label: 'Sobre el negocio', enabled: true, variant: 'image-left' },
-  { id: 'gallery', type: 'gallery', label: 'Galería', enabled: true, variant: 'grid' },
-  { id: 'testimonials', type: 'testimonials', label: 'Testimonios', enabled: true, variant: 'grid' },
-  { id: 'pricing', type: 'pricing', label: 'Precios', enabled: false, variant: 'cards' },
-  { id: 'faq', type: 'faq', label: 'Preguntas frecuentes', enabled: true, variant: 'accordion' },
-  { id: 'contact', type: 'contact', label: 'Contacto', enabled: true, variant: 'split' },
+  { id: 'hero', type: 'hero', label: 'Hero principal', enabled: true, variant: 'split', variants: ['split', 'centered', 'minimal', 'fullscreen'] },
+  { id: 'services', type: 'services', label: 'Servicios', enabled: true, variant: 'cards', variants: ['cards', 'list', 'featured'] },
+  { id: 'about', type: 'about', label: 'Sobre el negocio', enabled: true, variant: 'image-left', variants: ['image-left', 'image-right', 'text-only'] },
+  { id: 'gallery', type: 'gallery', label: 'Galería', enabled: true, variant: 'grid', variants: ['grid', 'masonry', 'carousel'] },
+  { id: 'testimonials', type: 'testimonials', label: 'Testimonios', enabled: true, variant: 'grid', variants: ['grid', 'featured', 'quotes'] },
+  { id: 'pricing', type: 'pricing', label: 'Precios', enabled: false, variant: 'cards', variants: ['cards', 'comparison', 'featured'] },
+  { id: 'faq', type: 'faq', label: 'Preguntas frecuentes', enabled: true, variant: 'accordion', variants: ['accordion', 'columns'] },
+  { id: 'contact', type: 'contact', label: 'Contacto', enabled: true, variant: 'split', variants: ['split', 'centered', 'form-only'] },
 ]
 
 const seedProjects: Project[] = [{
